@@ -76,7 +76,7 @@
 <!-- Add Modal -->
 <div class="modal fade" id="addCoffeeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <form ngForm #addForm="ngForm" (ngSubmit)="onAddCoffee(addForm.value)" class="modal-content">
+    <form ngForm #addForm="ngForm" (ngSubmit)="onAddCoffee(addForm)" class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Add a journal entry</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -84,11 +84,11 @@
       <div class="modal-body">
         <div class="mb-3">
           <label for="inputName" class="form-label">Name/Origin</label>
-          <input type="text" class="form-control" id="name" name="name" ngModel>
+          <input type="text" class="form-control" id="name" name="name" ngModel required>
         </div>
         <div class="mb-3">
           <label for="inputRoaster" class="form-label">Roaser</label>
-          <input type="text" class="form-control" id="roaster" name="roaster" ngModel>
+          <input type="text" class="form-control" id="roaster" name="roaster" ngModel required>
         </div>
         <div class="mb-3">
           <label for="inputRoastDate" class="form-label">Roast Date</label>
@@ -110,16 +110,10 @@
           <label for="inputRating" class="form-label">Rating</label>
           <select class="form-select" id="rating" name="rating" ngModel>
             <option selected>Open this select menu</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="3">4</option>
-            <option value="3">5</option>
-            <option value="3">6</option>
-            <option value="3">7</option>
-            <option value="3">8</option>
-            <option value="3">9</option>
-            <option value="3">10</option>
+            <option 
+              *ngFor="let num of [1,2,3,4,5,6,7,8,9,10]"
+              value="{{ num }}"
+              >{{ num }}</option>
           </select>
         </div>
         <div class="mb-3">
@@ -138,19 +132,58 @@
 <!-- Update Modal -->
 <div class="modal fade" id="updateCoffeeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content">
+    <form ngForm #updateForm="ngForm" (ngSubmit)="onUpdateCoffee(updateForm)" class="modal-content">
+      <input type="hidden" name="id" class="form-control" id="id" ngModel="{{coffeeToUpdate?.id}}">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Add a journal entry</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+        <div class="mb-3">
+          <label for="inputName" class="form-label">Name/Origin</label>
+          <input type="text" class="form-control" id="name" name="name" ngModel="{{coffeeToUpdate?.name}}" required>
+        </div>
+        <div class="mb-3">
+          <label for="inputRoaster" class="form-label">Roaser</label>
+          <input type="text" class="form-control" id="roaster" name="roaster" ngModel="{{coffeeToUpdate?.roaster}}" required>
+        </div>
+        <div class="mb-3">
+          <label for="inputRoastDate" class="form-label">Roast Date</label>
+          <input type="date" class="form-control" id="roastDate" name="roastDate" ngModel="{{coffeeToUpdate?.roastDate}}">
+        </div>
+        <div class="mb-3">
+          <label for="inputRoastDate" class="form-label">Variety</label>
+          <input type="text" class="form-control" id="variety" name="variety" ngModel="{{coffeeToUpdate?.variety}}">
+        </div>
+        <div class="mb-3">
+          <label for="inputProcess" class="form-label">Process</label>
+          <input type="text" class="form-control" id="process" name="process" ngModel="{{coffeeToUpdate?.process}}">
+        </div>
+        <div class="mb-3">
+          <label for="inputBrewMethod" class="form-label">Brew Method</label>
+          <input type="text" class="form-control" id="brewMethod" name="brewMethod" ngModel="{{coffeeToUpdate?.brewMethod}}">
+        </div>
+        <div class="mb-3">
+          <label for="inputRating" class="form-label">Rating</label>
+          <select class="form-select" id="rating" name="rating" ngModel="{{coffeeToUpdate?.rating}}">
+            <option>Open this select menu</option>
+            <option 
+              *ngFor="let num of [1,2,3,4,5,6,7,8,9,10]"
+              value="{{ num }}"
+              [selected]="num === coffeeToUpdate?.rating"
+              >{{ num }}</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="textareaNotes" class="form-label">Notes</label>
+          <textarea class="form-control" id="notes" rows="3" name="notes" ngModel="{{coffeeToUpdate?.notes}}"></textarea>
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" id="editModalCloseButton" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Save changes</button>
       </div>
-    </div>
+    </form>
   </div>
 </div>
 
@@ -163,12 +196,12 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+        Are you sure you want to delete the entry for {{coffeeToDelete?.name}}?
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
-      </div>
+      <form (ngSubmit)="onDeleteCoffee(coffeeToDelete?.id!)" class="modal-footer">
+        <button type="button" id="deleteModalCloseButton" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Yes, delete</button>
+      </form>
     </div>
   </div>
 </div>
