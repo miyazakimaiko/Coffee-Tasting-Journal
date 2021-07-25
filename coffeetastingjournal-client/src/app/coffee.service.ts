@@ -25,7 +25,7 @@ export class CoffeeService {
     return this.http.put<Coffee>(`${this.apiServerUrl}/coffee/update`, coffee);
   }
 
-  public deleteCoffee(coffeeId: string): Observable<void> {
+  public deleteCoffee(coffeeId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiServerUrl}/coffee/delete/${coffeeId}`);
   }
 }
