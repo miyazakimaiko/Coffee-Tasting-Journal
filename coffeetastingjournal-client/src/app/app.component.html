@@ -20,49 +20,49 @@
 <div class="container" id="main-container">
 <div class="row">
     <!-- Start col -->
-    <div *ngFor="let coffee of coffees" class="col-lg-6">
+    <div *ngFor="let c of coffees" class="col-lg-6">
         <div class="card m-b-30">
             <div class="card-body py-5">
                 <div class="row">
-                    <div class="col-lg-3 text-center">
-                        <img src="#" class="img-fluid mb-3" alt="user" />
+                    <div class="text-center">
+                        <radar-chart [coffee]="c"></radar-chart>
                     </div>
-                    <div class="col-lg-9">
-                        <h4>{{ coffee?.name }}</h4>
-                        <p>{{ coffee?.roaster }}</p>
+                    <div>
+                        <h4>{{ c?.name }}</h4>
+                        <p>{{ c?.roaster }}</p>
                         <div class="table-responsive">
                             <table class="table table-borderless mb-0">
                                 <tbody>
                                     <tr>
                                         <th scope="row" class="p-1">Roast Date :</th>
-                                        <td class="p-1">{{ coffee?.roastDate }}</td>
+                                        <td class="p-1">{{ c?.roastDate }}</td>
                                     </tr>
                                     <tr>
                                         <th scope="row" class="p-1">Variety :</th>
-                                        <td class="p-1">{{ coffee?.variety }}</td>
+                                        <td class="p-1">{{ c?.variety }}</td>
                                     </tr>
                                     <tr>
                                         <th scope="row" class="p-1">Process :</th>
-                                        <td class="p-1">{{ coffee?.process }}</td>
+                                        <td class="p-1">{{ c?.process }}</td>
                                     </tr>
                                     <tr>
                                         <th scope="row" class="p-1">Brew Method :</th>
-                                        <td class="p-1">{{ coffee?.brewMethod }}</td>
+                                        <td class="p-1">{{ c?.brewMethod }}</td>
                                     </tr>
                                     <tr>
                                       <th scope="row" class="p-1">Rating :</th>
-                                      <td class="p-1">{{ coffee?.rating }}</td>
+                                      <td class="p-1">{{ c?.rating }}</td>
                                     </tr>
                                     <tr>
                                       <th scope="row" class="p-1">Note :</th>
-                                      <td class="p-1">{{ coffee?.notes }}</td>
+                                      <td class="p-1">{{ c?.notes }}</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         <div class="button-list mt-4 mb-3">
-                          <button (click)="onOpenModal(coffee, 'delete')" type="button" data-bs-toggle="modal" data-bs-target="#deleteCoffeeModal" class="btn btn-primary-rgba"><i class="feather icon-message-square mr-2"></i>Delete</button>
-                          <button (click)="onOpenModal(coffee, 'update')" type="button" data-bs-toggle="modal" data-bs-target="#updateCoffeeModal" class="btn btn-success-rgba"><i class="feather icon-phone mr-2"></i>Edit</button>
+                          <button (click)="onOpenModal(c, 'delete')" type="button" data-bs-toggle="modal" data-bs-target="#deleteCoffeeModal" class="btn btn-primary-rgba"><i class="feather icon-message-square mr-2"></i>Delete</button>
+                          <button (click)="onOpenModal(c, 'update')" type="button" data-bs-toggle="modal" data-bs-target="#updateCoffeeModal" class="btn btn-success-rgba"><i class="feather icon-phone mr-2"></i>Edit</button>
                         </div>
                     </div>
                 </div>
@@ -82,43 +82,209 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div class="mb-3">
-          <label for="inputName" class="form-label">Name/Origin</label>
-          <input type="text" class="form-control" id="name" name="name" ngModel required>
+        <div class="body-left">
+          <div class="mb-3">
+            <label for="inputName" class="form-label">Name/Origin</label>
+            <input type="text" class="form-control" id="name" name="name" ngModel required>
+          </div>
+          <div class="mb-3">
+            <label for="inputRoaster" class="form-label">Roaser</label>
+            <input type="text" class="form-control" id="roaster" name="roaster" ngModel required>
+          </div>
+          <div class="mb-3">
+            <label for="inputRoastDate" class="form-label">Roast Date</label>
+            <input type="date" class="form-control" id="roastDate" name="roastDate" ngModel>
+          </div>
+          <div class="mb-3">
+            <label for="inputRoastDate" class="form-label">Variety</label>
+            <input type="text" class="form-control" id="variety" name="variety" ngModel>
+          </div>
+          <div class="mb-3">
+            <label for="inputProcess" class="form-label">Process</label>
+            <input type="text" class="form-control" id="process" name="process" ngModel>
+          </div>
+          <div class="mb-3">
+            <label for="inputBrewMethod" class="form-label">Brew Method</label>
+            <input type="text" class="form-control" id="brewMethod" name="brewMethod" ngModel>
+          </div>
+          <div class="mb-3">
+            <label for="inputRating" class="form-label">Rating</label>
+            <select class="form-select" id="rating" name="rating" ngModel>
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                >{{ num }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="textareaNotes" class="form-label">Notes</label>
+            <textarea class="form-control" id="notes" rows="3" name="notes" ngModel></textarea>
+          </div>
         </div>
-        <div class="mb-3">
-          <label for="inputRoaster" class="form-label">Roaser</label>
-          <input type="text" class="form-control" id="roaster" name="roaster" ngModel required>
+        <div class="body-middle">
+          <div class="mb-3">
+            <label for="inputSweet" class="form-label">Sweet</label>
+            <select class="form-select" id="sweet" name="sweet" ngModel>
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                >{{ num }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="inputAcidic" class="form-label">Acidic</label>
+            <select class="form-select" id="acidic" name="acidic" ngModel>
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                >{{ num }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="inputFloral" class="form-label">Floral</label>
+            <select class="form-select" id="floral" name="floral" ngModel>
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                >{{ num }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="inputSpicy" class="form-label">Spicy</label>
+            <select class="form-select" id="spicy" name="spicy" ngModel>
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                >{{ num }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="inputSalty" class="form-label">Salty</label>
+            <select class="form-select" id="salty" name="salty" ngModel>
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                >{{ num }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="inputBerryfriut" class="form-label">Berryfriut</label>
+            <select class="form-select" id="berryfriut" name="berryfriut" ngModel>
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                >{{ num }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="inputCitrusfruit" class="form-label">Citrusfruit</label>
+            <select class="form-select" id="citrusfruit" name="citrusfruit" ngModel>
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                >{{ num }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="inputStonefruit" class="form-label">Stonefruit</label>
+            <select class="form-select" id="stonefruit" name="stonefruit" ngModel>
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                >{{ num }}</option>
+            </select>
+          </div>
         </div>
-        <div class="mb-3">
-          <label for="inputRoastDate" class="form-label">Roast Date</label>
-          <input type="date" class="form-control" id="roastDate" name="roastDate" ngModel>
-        </div>
-        <div class="mb-3">
-          <label for="inputRoastDate" class="form-label">Variety</label>
-          <input type="text" class="form-control" id="variety" name="variety" ngModel>
-        </div>
-        <div class="mb-3">
-          <label for="inputProcess" class="form-label">Process</label>
-          <input type="text" class="form-control" id="process" name="process" ngModel>
-        </div>
-        <div class="mb-3">
-          <label for="inputBrewMethod" class="form-label">Brew Method</label>
-          <input type="text" class="form-control" id="brewMethod" name="brewMethod" ngModel>
-        </div>
-        <div class="mb-3">
-          <label for="inputRating" class="form-label">Rating</label>
-          <select class="form-select" id="rating" name="rating" ngModel>
-            <option selected>Open this select menu</option>
-            <option 
-              *ngFor="let num of [1,2,3,4,5,6,7,8,9,10]"
-              value="{{ num }}"
-              >{{ num }}</option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <label for="textareaNotes" class="form-label">Notes</label>
-          <textarea class="form-control" id="notes" rows="3" name="notes" ngModel></textarea>
+        <div class="body-right">
+          <div class="mb-3">
+            <label for="inputChocolate" class="form-label">Chocolate</label>
+            <select class="form-select" id="chocolate" name="chocolate" ngModel>
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                >{{ num }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="inputCaramel" class="form-label">Caramel</label>
+            <select class="form-select" id="caramel" name="caramel" ngModel>
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                >{{ num }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="inputSmoky" class="form-label">Smoky</label>
+            <select class="form-select" id="smoky" name="smoky" ngModel>
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                >{{ num }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="inputBitter" class="form-label">Bitter</label>
+            <select class="form-select" id="bitter" name="bitter" ngModel>
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                >{{ num }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="inputSavory" class="form-label">Savory</label>
+            <select class="form-select" id="savory" name="savory" ngModel>
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                >{{ num }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="inputBody" class="form-label">Body</label>
+            <select class="form-select" id="body" name="body" ngModel>
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                >{{ num }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="inputClean" class="form-label">Clean</label>
+            <select class="form-select" id="clean" name="clean" ngModel>
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                >{{ num }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="inputLinger" class="form-label">Linger</label>
+            <select class="form-select" id="linger" name="linger" ngModel>
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                >{{ num }}</option>
+            </select>
+          </div>
         </div>
       </div>
       <div class="modal-footer">
@@ -135,48 +301,229 @@
     <form ngForm #updateForm="ngForm" (ngSubmit)="onUpdateCoffee(updateForm)" class="modal-content">
       <input type="hidden" name="id" class="form-control" id="id" ngModel="{{coffeeToUpdate?.id}}">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add a journal entry</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Update a journal entry for {{coffeeToUpdate?.name}}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div class="mb-3">
-          <label for="inputName" class="form-label">Name/Origin</label>
-          <input type="text" class="form-control" id="name" name="name" ngModel="{{coffeeToUpdate?.name}}" required>
+        <div class="body-left">
+          <div class="mb-3">
+            <label for="inputName" class="form-label">Name/Origin</label>
+            <input type="text" class="form-control" id="name" name="name" ngModel="{{coffeeToUpdate?.name}}" required>
+          </div>
+          <div class="mb-3">
+            <label for="inputRoaster" class="form-label">Roaser</label>
+            <input type="text" class="form-control" id="roaster" name="roaster" ngModel="{{coffeeToUpdate?.roaster}}" required>
+          </div>
+          <div class="mb-3">
+            <label for="inputRoastDate" class="form-label">Roast Date</label>
+            <input type="date" class="form-control" id="roastDate" name="roastDate" ngModel="{{coffeeToUpdate?.roastDate}}">
+          </div>
+          <div class="mb-3">
+            <label for="inputRoastDate" class="form-label">Variety</label>
+            <input type="text" class="form-control" id="variety" name="variety" ngModel="{{coffeeToUpdate?.variety}}">
+          </div>
+          <div class="mb-3">
+            <label for="inputProcess" class="form-label">Process</label>
+            <input type="text" class="form-control" id="process" name="process" ngModel="{{coffeeToUpdate?.process}}">
+          </div>
+          <div class="mb-3">
+            <label for="inputBrewMethod" class="form-label">Brew Method</label>
+            <input type="text" class="form-control" id="brewMethod" name="brewMethod" ngModel="{{coffeeToUpdate?.brewMethod}}">
+          </div>
+          <div class="mb-3">
+            <label for="inputRating" class="form-label">Rating</label>
+            <select class="form-select" id="rating" name="rating" ngModel="{{coffeeToUpdate?.rating}}">
+              <option>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                [selected]="num === coffeeToUpdate?.rating"
+                >{{ num }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="textareaNotes" class="form-label">Notes</label>
+            <textarea class="form-control" id="notes" rows="3" name="notes" ngModel="{{coffeeToUpdate?.notes}}"></textarea>
+          </div>
         </div>
-        <div class="mb-3">
-          <label for="inputRoaster" class="form-label">Roaser</label>
-          <input type="text" class="form-control" id="roaster" name="roaster" ngModel="{{coffeeToUpdate?.roaster}}" required>
+        <div class="body-middle">
+          <div class="mb-3">
+            <label for="inputSweet" class="form-label">Sweet</label>
+            <select class="form-select" id="sweet" name="sweet" ngModel="{{coffeeToUpdate?.sweet}}">
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                >{{ num }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="inputAcidic" class="form-label">Acidic</label>
+            <select class="form-select" id="acidic" name="acidic" ngModel="{{coffeeToUpdate?.acidic}}">
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                [selected]="num === coffeeToUpdate?.acidic"
+                >{{ num }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="inputFloral" class="form-label">Floral</label>
+            <select class="form-select" id="floral" name="floral" ngModel="{{coffeeToUpdate?.floral}}">
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                [selected]="num === coffeeToUpdate?.floral"
+                >{{ num }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="inputSpicy" class="form-label">Spicy</label>
+            <select class="form-select" id="spicy" name="spicy" ngModel="{{coffeeToUpdate?.spicy}}">
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                [selected]="num === coffeeToUpdate?.spicy"
+                >{{ num }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="inputSalty" class="form-label">Salty</label>
+            <select class="form-select" id="salty" name="salty" ngModel="{{coffeeToUpdate?.salty}}">
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                [selected]="num === coffeeToUpdate?.salty"
+                >{{ num }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="inputBerryfriut" class="form-label">Berryfriut</label>
+            <select class="form-select" id="berryfriut" name="berryfriut" ngModel="{{coffeeToUpdate?.berryfriut}}">
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                [selected]="num === coffeeToUpdate?.berryfriut"
+                >{{ num }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="inputCitrusfruit" class="form-label">Citrusfruit</label>
+            <select class="form-select" id="citrusfruit" name="citrusfruit" ngModel="{{coffeeToUpdate?.citrusfruit}}">
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                [selected]="num === coffeeToUpdate?.citrusfruit"
+                >{{ num }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="inputStonefruit" class="form-label">Stonefruit</label>
+            <select class="form-select" id="stonefruit" name="stonefruit" ngModel="{{coffeeToUpdate?.stonefruit}}">
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                [selected]="num === coffeeToUpdate?.stonefruit"
+                >{{ num }}</option>
+            </select>
+          </div>
         </div>
-        <div class="mb-3">
-          <label for="inputRoastDate" class="form-label">Roast Date</label>
-          <input type="date" class="form-control" id="roastDate" name="roastDate" ngModel="{{coffeeToUpdate?.roastDate}}">
-        </div>
-        <div class="mb-3">
-          <label for="inputRoastDate" class="form-label">Variety</label>
-          <input type="text" class="form-control" id="variety" name="variety" ngModel="{{coffeeToUpdate?.variety}}">
-        </div>
-        <div class="mb-3">
-          <label for="inputProcess" class="form-label">Process</label>
-          <input type="text" class="form-control" id="process" name="process" ngModel="{{coffeeToUpdate?.process}}">
-        </div>
-        <div class="mb-3">
-          <label for="inputBrewMethod" class="form-label">Brew Method</label>
-          <input type="text" class="form-control" id="brewMethod" name="brewMethod" ngModel="{{coffeeToUpdate?.brewMethod}}">
-        </div>
-        <div class="mb-3">
-          <label for="inputRating" class="form-label">Rating</label>
-          <select class="form-select" id="rating" name="rating" ngModel="{{coffeeToUpdate?.rating}}">
-            <option>Open this select menu</option>
-            <option 
-              *ngFor="let num of [1,2,3,4,5,6,7,8,9,10]"
-              value="{{ num }}"
-              [selected]="num === coffeeToUpdate?.rating"
-              >{{ num }}</option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <label for="textareaNotes" class="form-label">Notes</label>
-          <textarea class="form-control" id="notes" rows="3" name="notes" ngModel="{{coffeeToUpdate?.notes}}"></textarea>
+        <div class="body-right">
+          <div class="mb-3">
+            <label for="inputChocolate" class="form-label">Chocolate</label>
+            <select class="form-select" id="chocolate" name="chocolate" ngModel="{{coffeeToUpdate?.chocolate}}">
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                [selected]="num === coffeeToUpdate?.chocolate"
+                >{{ num }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="inputCaramel" class="form-label">Caramel</label>
+            <select class="form-select" id="caramel" name="caramel" ngModel="{{coffeeToUpdate?.caramel}}">
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                [selected]="num === coffeeToUpdate?.caramel"
+                >{{ num }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="inputSmoky" class="form-label">Smoky</label>
+            <select class="form-select" id="smoky" name="smoky" ngModel="{{coffeeToUpdate?.smoky}}">
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                [selected]="num === coffeeToUpdate?.smoky"
+                >{{ num }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="inputBitter" class="form-label">Bitter</label>
+            <select class="form-select" id="bitter" name="bitter" ngModel="{{coffeeToUpdate?.bitter}}">
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                [selected]="num === coffeeToUpdate?.bitter"
+                >{{ num }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="inputSavory" class="form-label">Savory</label>
+            <select class="form-select" id="savory" name="savory" ngModel="{{coffeeToUpdate?.savory}}">
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                [selected]="num === coffeeToUpdate?.savory"
+                >{{ num }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="inputBody" class="form-label">Body</label>
+            <select class="form-select" id="body" name="body" ngModel="{{coffeeToUpdate?.body}}">
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                [selected]="num === coffeeToUpdate?.body"
+                >{{ num }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="inputClean" class="form-label">Clean</label>
+            <select class="form-select" id="clean" name="clean" ngModel="{{coffeeToUpdate?.clean}}">
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                [selected]="num === coffeeToUpdate?.clean"
+                >{{ num }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="inputLinger" class="form-label">Linger</label>
+            <select class="form-select" id="linger" name="linger" ngModel="{{coffeeToUpdate?.linger}}">
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                [selected]="num === coffeeToUpdate?.linger"
+                >{{ num }}</option>
+            </select>
+          </div>
         </div>
       </div>
       <div class="modal-footer">
