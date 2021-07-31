@@ -11,9 +11,11 @@ import { CoffeeService } from './coffee.service';
 })
 export class AppComponent implements OnInit {
   
-  public coffees: Coffee[] | undefined;
-  public coffeeToUpdate: Coffee | undefined;
-  public coffeeToDelete!: Coffee;
+  evaluationRange = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10]
+  coffee!: Coffee;
+  coffees: Coffee[] | undefined;
+  coffeeToUpdate: Coffee | undefined;
+  coffeeToDelete!: Coffee;
 
   constructor(private coffeeService: CoffeeService) {}
 
@@ -33,8 +35,10 @@ export class AppComponent implements OnInit {
   }
 
   public onAddCoffee(addForm: NgForm): void {
+    this.coffee = addForm.value;
+    console.log(this.coffee)
     document.getElementById('closeButton')?.click();
-    this.coffeeService.addCoffee(addForm.value).subscribe(
+    this.coffeeService.addCoffee(this.coffee).subscribe(
       (response: Coffee) => {
         this.getCoffees();
         addForm.reset();
