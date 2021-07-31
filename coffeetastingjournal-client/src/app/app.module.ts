@@ -4,15 +4,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
+import { ChartsModule } from 'ng2-charts';
+import { RadarChartComponent } from './radar-chart/radar-chart.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RadarChartComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
