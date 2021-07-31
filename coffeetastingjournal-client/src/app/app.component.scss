@@ -28,3 +28,16 @@
         margin-right: 10px;
     }
 }
+
+.modal-dialog {
+    max-width: 800px!important;
+
+    .modal-body {
+        display: flex;
+        justify-content: space-evenly;
+
+        .body-left, .body-middle, .body-right {
+            width: 30%;
+        }
+    }
+}
