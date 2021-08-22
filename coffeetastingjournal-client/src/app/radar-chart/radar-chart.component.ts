@@ -10,22 +10,20 @@ export class RadarChartComponent implements OnInit {
   @Input() coffee: any;
 
   radarChartLabels: Label[] = [
-    'Sweet',
     'Acidic',
     'Floral',
-    'Spicy',
-    'Salty',
     'Berryfruit',
     'Citrusfruit',
     'Stonefruit',
     'Chocolate',
     'Caramel',
-    'Smoky',
     'Bitter',
+    'Smoky',
     'Savory',
+    'Spicy',
     'Body',
-    'Clean',
-    'Linger'
+    'Linger',
+    'Clean'
   ];
 
   radarChartData: ChartDataSets[] = [
@@ -34,24 +32,22 @@ export class RadarChartComponent implements OnInit {
 
   radarChartType: ChartType = 'radar';
 
+  radarChartOptions: RadialChartOptions = {
+    scale: {
+      ticks: {
+          beginAtZero: true,
+          min: 0,
+          max: 10,
+          //stepSize: 10
+      }
+    }
+  };
+
   constructor() {}
 
   ngOnInit() {
-    this.radarChartData[0].data?.push(this.coffee.sweet)
-    this.radarChartData[0].data?.push(this.coffee.acidic)
-    this.radarChartData[0].data?.push(this.coffee.floral)
-    this.radarChartData[0].data?.push(this.coffee.spicy)
-    this.radarChartData[0].data?.push(this.coffee.salty)
-    this.radarChartData[0].data?.push(this.coffee.berryfriut)
-    this.radarChartData[0].data?.push(this.coffee.citrusfruit)
-    this.radarChartData[0].data?.push(this.coffee.stonefruit)
-    this.radarChartData[0].data?.push(this.coffee.chocolate)
-    this.radarChartData[0].data?.push(this.coffee.caramel)
-    this.radarChartData[0].data?.push(this.coffee.smoky)
-    this.radarChartData[0].data?.push(this.coffee.bitter)
-    this.radarChartData[0].data?.push(this.coffee.savory)
-    this.radarChartData[0].data?.push(this.coffee.body)
-    this.radarChartData[0].data?.push(this.coffee.clean)
-    this.radarChartData[0].data?.push(this.coffee.linger)
+    for(const t in this.coffee.taste) {
+      this.radarChartData[0].data?.push(this.coffee.taste[t])
+    }
   }
 }
