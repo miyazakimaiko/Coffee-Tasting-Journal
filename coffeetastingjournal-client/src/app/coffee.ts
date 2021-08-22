@@ -8,20 +8,22 @@ export class Coffee {
     brewMethod!: string;
     notes!: string;
     rating!: number;
-    sweet!: number;
+    taste!: Taste;
+}
+
+export class Taste {
     acidic!: number;
     floral!: number;
-    spicy!: number;
-    salty!: number;
     berryfriut!: number;
     citrusfruit!: number;
     stonefruit!: number;
     chocolate!: number;
     caramel!: number;
-    smoky!: number;
     bitter!: number;
+    smoky!: number;
     savory!: number;
+    spicy!: number;
     body!: number;
-    clean!: number;
     linger!: number;
+    clean!: number;
 }
