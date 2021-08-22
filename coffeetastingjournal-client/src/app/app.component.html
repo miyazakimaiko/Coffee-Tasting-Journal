@@ -1,5 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Coffee Tasting Journal</a>
+  <a class="navbar-brand" href="#">
+    <img class="logo" src="../assets/img/coffee_2.png" alt="coffee logo"/>
+    Coffee Tasting Journal
+  </a>
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -11,8 +14,16 @@
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2 search-input" type="search" placeholder="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <input 
+      (ngModelChange)="onSearchCoffees(key.value)" 
+      #key="ngModel" 
+      ngModel 
+      class="form-control mr-sm-2 search-input" 
+      type="search" 
+      placeholder="Search"
+      name="search"
+      id="searchMatched"
+      required>
     </form>
   </div>
 </nav>
@@ -117,22 +128,8 @@
                 >{{ num }}</option>
             </select>
           </div>
-          <div class="mb-3">
-            <label for="textareaNotes" class="form-label">Notes</label>
-            <textarea class="form-control" id="notes" rows="3" name="notes" ngModel></textarea>
-          </div>
         </div>
         <div class="body-middle">
-          <div class="mb-3">
-            <label for="inputSweet" class="form-label">Sweet</label>
-            <select class="form-select" id="sweet" name="sweet" ngModel>
-              <option selected>Open this select menu</option>
-              <option 
-                *ngFor="let num of evaluationRange"
-                value="{{ num }}"
-                >{{ num }}</option>
-            </select>
-          </div>
           <div class="mb-3">
             <label for="inputAcidic" class="form-label">Acidic</label>
             <select class="form-select" id="acidic" name="acidic" ngModel>
@@ -156,16 +153,6 @@
           <div class="mb-3">
             <label for="inputSpicy" class="form-label">Spicy</label>
             <select class="form-select" id="spicy" name="spicy" ngModel>
-              <option selected>Open this select menu</option>
-              <option 
-                *ngFor="let num of evaluationRange"
-                value="{{ num }}"
-                >{{ num }}</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="inputSalty" class="form-label">Salty</label>
-            <select class="form-select" id="salty" name="salty" ngModel>
               <option selected>Open this select menu</option>
               <option 
                 *ngFor="let num of evaluationRange"
@@ -203,8 +190,6 @@
                 >{{ num }}</option>
             </select>
           </div>
-        </div>
-        <div class="body-right">
           <div class="mb-3">
             <label for="inputChocolate" class="form-label">Chocolate</label>
             <select class="form-select" id="chocolate" name="chocolate" ngModel>
@@ -215,6 +200,8 @@
                 >{{ num }}</option>
             </select>
           </div>
+        </div>
+        <div class="body-right">
           <div class="mb-3">
             <label for="inputCaramel" class="form-label">Caramel</label>
             <select class="form-select" id="caramel" name="caramel" ngModel>
@@ -287,6 +274,10 @@
           </div>
         </div>
       </div>
+      <div class="body-notes">
+        <label for="textareaNotes" class="form-label">Notes</label>
+        <textarea class="form-control" id="notes" rows="3" name="notes" ngModel></textarea>
+      </div>
       <div class="modal-footer">
         <button type="button" id="closeButton" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">Save changes</button>
@@ -341,190 +332,169 @@
                 >{{ num }}</option>
             </select>
           </div>
-          <div class="mb-3">
-            <label for="textareaNotes" class="form-label">Notes</label>
-            <textarea class="form-control" id="notes" rows="3" name="notes" ngModel="{{coffeeToUpdate?.notes}}"></textarea>
-          </div>
         </div>
         <div class="body-middle">
           <div class="mb-3">
-            <label for="inputSweet" class="form-label">Sweet</label>
-            <select class="form-select" id="sweet" name="sweet" ngModel="{{coffeeToUpdate?.sweet}}">
-              <option selected>Open this select menu</option>
-              <option 
-                *ngFor="let num of evaluationRange"
-                value="{{ num }}"
-                >{{ num }}</option>
-            </select>
-          </div>
-          <div class="mb-3">
             <label for="inputAcidic" class="form-label">Acidic</label>
-            <select class="form-select" id="acidic" name="acidic" ngModel="{{coffeeToUpdate?.acidic}}">
+            <select class="form-select" id="acidic" name="acidic" ngModel="{{coffeeToUpdate?.taste?.acidic}}">
               <option selected>Open this select menu</option>
               <option 
                 *ngFor="let num of evaluationRange"
                 value="{{ num }}"
-                [selected]="num === coffeeToUpdate?.acidic"
+                [selected]="num === coffeeToUpdate?.taste?.acidic"
                 >{{ num }}</option>
             </select>
           </div>
           <div class="mb-3">
             <label for="inputFloral" class="form-label">Floral</label>
-            <select class="form-select" id="floral" name="floral" ngModel="{{coffeeToUpdate?.floral}}">
+            <select class="form-select" id="floral" name="floral" ngModel="{{coffeeToUpdate?.taste?.floral}}">
               <option selected>Open this select menu</option>
               <option 
                 *ngFor="let num of evaluationRange"
                 value="{{ num }}"
-                [selected]="num === coffeeToUpdate?.floral"
+                [selected]="num === coffeeToUpdate?.taste?.floral"
                 >{{ num }}</option>
             </select>
           </div>
           <div class="mb-3">
             <label for="inputSpicy" class="form-label">Spicy</label>
-            <select class="form-select" id="spicy" name="spicy" ngModel="{{coffeeToUpdate?.spicy}}">
+            <select class="form-select" id="spicy" name="spicy" ngModel="{{coffeeToUpdate?.taste?.spicy}}">
               <option selected>Open this select menu</option>
               <option 
                 *ngFor="let num of evaluationRange"
                 value="{{ num }}"
-                [selected]="num === coffeeToUpdate?.spicy"
-                >{{ num }}</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="inputSalty" class="form-label">Salty</label>
-            <select class="form-select" id="salty" name="salty" ngModel="{{coffeeToUpdate?.salty}}">
-              <option selected>Open this select menu</option>
-              <option 
-                *ngFor="let num of evaluationRange"
-                value="{{ num }}"
-                [selected]="num === coffeeToUpdate?.salty"
+                [selected]="num === coffeeToUpdate?.taste?.spicy"
                 >{{ num }}</option>
             </select>
           </div>
           <div class="mb-3">
             <label for="inputBerryfriut" class="form-label">Berryfriut</label>
-            <select class="form-select" id="berryfriut" name="berryfriut" ngModel="{{coffeeToUpdate?.berryfriut}}">
+            <select class="form-select" id="berryfriut" name="berryfriut" ngModel="{{coffeeToUpdate?.taste?.berryfriut}}">
               <option selected>Open this select menu</option>
               <option 
                 *ngFor="let num of evaluationRange"
                 value="{{ num }}"
-                [selected]="num === coffeeToUpdate?.berryfriut"
+                [selected]="num === coffeeToUpdate?.taste?.berryfriut"
                 >{{ num }}</option>
             </select>
           </div>
           <div class="mb-3">
             <label for="inputCitrusfruit" class="form-label">Citrusfruit</label>
-            <select class="form-select" id="citrusfruit" name="citrusfruit" ngModel="{{coffeeToUpdate?.citrusfruit}}">
+            <select class="form-select" id="citrusfruit" name="citrusfruit" ngModel="{{coffeeToUpdate?.taste?.citrusfruit}}">
               <option selected>Open this select menu</option>
               <option 
                 *ngFor="let num of evaluationRange"
                 value="{{ num }}"
-                [selected]="num === coffeeToUpdate?.citrusfruit"
+                [selected]="num === coffeeToUpdate?.taste?.citrusfruit"
                 >{{ num }}</option>
             </select>
           </div>
           <div class="mb-3">
             <label for="inputStonefruit" class="form-label">Stonefruit</label>
-            <select class="form-select" id="stonefruit" name="stonefruit" ngModel="{{coffeeToUpdate?.stonefruit}}">
+            <select class="form-select" id="stonefruit" name="stonefruit" ngModel="{{coffeeToUpdate?.taste?.stonefruit}}">
               <option selected>Open this select menu</option>
               <option 
                 *ngFor="let num of evaluationRange"
                 value="{{ num }}"
-                [selected]="num === coffeeToUpdate?.stonefruit"
+                [selected]="num === coffeeToUpdate?.taste?.stonefruit"
+                >{{ num }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="inputChocolate" class="form-label">Chocolate</label>
+            <select class="form-select" id="chocolate" name="chocolate" ngModel="{{coffeeToUpdate?.taste?.chocolate}}">
+              <option selected>Open this select menu</option>
+              <option 
+                *ngFor="let num of evaluationRange"
+                value="{{ num }}"
+                [selected]="num === coffeeToUpdate?.taste?.chocolate"
                 >{{ num }}</option>
             </select>
           </div>
         </div>
         <div class="body-right">
           <div class="mb-3">
-            <label for="inputChocolate" class="form-label">Chocolate</label>
-            <select class="form-select" id="chocolate" name="chocolate" ngModel="{{coffeeToUpdate?.chocolate}}">
-              <option selected>Open this select menu</option>
-              <option 
-                *ngFor="let num of evaluationRange"
-                value="{{ num }}"
-                [selected]="num === coffeeToUpdate?.chocolate"
-                >{{ num }}</option>
-            </select>
-          </div>
-          <div class="mb-3">
             <label for="inputCaramel" class="form-label">Caramel</label>
-            <select class="form-select" id="caramel" name="caramel" ngModel="{{coffeeToUpdate?.caramel}}">
+            <select class="form-select" id="caramel" name="caramel" ngModel="{{coffeeToUpdate?.taste?.caramel}}">
               <option selected>Open this select menu</option>
               <option 
                 *ngFor="let num of evaluationRange"
                 value="{{ num }}"
-                [selected]="num === coffeeToUpdate?.caramel"
+                [selected]="num === coffeeToUpdate?.taste?.caramel"
                 >{{ num }}</option>
             </select>
           </div>
           <div class="mb-3">
             <label for="inputSmoky" class="form-label">Smoky</label>
-            <select class="form-select" id="smoky" name="smoky" ngModel="{{coffeeToUpdate?.smoky}}">
+            <select class="form-select" id="smoky" name="smoky" ngModel="{{coffeeToUpdate?.taste?.smoky}}">
               <option selected>Open this select menu</option>
               <option 
                 *ngFor="let num of evaluationRange"
                 value="{{ num }}"
-                [selected]="num === coffeeToUpdate?.smoky"
+                [selected]="num === coffeeToUpdate?.taste?.smoky"
                 >{{ num }}</option>
             </select>
           </div>
           <div class="mb-3">
             <label for="inputBitter" class="form-label">Bitter</label>
-            <select class="form-select" id="bitter" name="bitter" ngModel="{{coffeeToUpdate?.bitter}}">
+            <select class="form-select" id="bitter" name="bitter" ngModel="{{coffeeToUpdate?.taste?.bitter}}">
               <option selected>Open this select menu</option>
               <option 
                 *ngFor="let num of evaluationRange"
                 value="{{ num }}"
-                [selected]="num === coffeeToUpdate?.bitter"
+                [selected]="num === coffeeToUpdate?.taste?.bitter"
                 >{{ num }}</option>
             </select>
           </div>
           <div class="mb-3">
             <label for="inputSavory" class="form-label">Savory</label>
-            <select class="form-select" id="savory" name="savory" ngModel="{{coffeeToUpdate?.savory}}">
+            <select class="form-select" id="savory" name="savory" ngModel="{{coffeeToUpdate?.taste?.savory}}">
               <option selected>Open this select menu</option>
               <option 
                 *ngFor="let num of evaluationRange"
                 value="{{ num }}"
-                [selected]="num === coffeeToUpdate?.savory"
+                [selected]="num === coffeeToUpdate?.taste?.savory"
                 >{{ num }}</option>
             </select>
           </div>
           <div class="mb-3">
             <label for="inputBody" class="form-label">Body</label>
-            <select class="form-select" id="body" name="body" ngModel="{{coffeeToUpdate?.body}}">
+            <select class="form-select" id="body" name="body" ngModel="{{coffeeToUpdate?.taste?.body}}">
               <option selected>Open this select menu</option>
               <option 
                 *ngFor="let num of evaluationRange"
                 value="{{ num }}"
-                [selected]="num === coffeeToUpdate?.body"
+                [selected]="num === coffeeToUpdate?.taste?.body"
                 >{{ num }}</option>
             </select>
           </div>
           <div class="mb-3">
             <label for="inputClean" class="form-label">Clean</label>
-            <select class="form-select" id="clean" name="clean" ngModel="{{coffeeToUpdate?.clean}}">
+            <select class="form-select" id="clean" name="clean" ngModel="{{coffeeToUpdate?.taste?.clean}}">
               <option selected>Open this select menu</option>
               <option 
                 *ngFor="let num of evaluationRange"
                 value="{{ num }}"
-                [selected]="num === coffeeToUpdate?.clean"
+                [selected]="num === coffeeToUpdate?.taste?.clean"
                 >{{ num }}</option>
             </select>
           </div>
           <div class="mb-3">
             <label for="inputLinger" class="form-label">Linger</label>
-            <select class="form-select" id="linger" name="linger" ngModel="{{coffeeToUpdate?.linger}}">
+            <select class="form-select" id="linger" name="linger" ngModel="{{coffeeToUpdate?.taste?.linger}}">
               <option selected>Open this select menu</option>
               <option 
                 *ngFor="let num of evaluationRange"
                 value="{{ num }}"
-                [selected]="num === coffeeToUpdate?.linger"
+                [selected]="num === coffeeToUpdate?.taste?.linger"
                 >{{ num }}</option>
             </select>
           </div>
         </div>
+      </div>
+      <div class="body-notes">
+        <label for="textareaNotes" class="form-label">Notes</label>
+        <textarea class="form-control" id="notes" rows="3" name="notes" ngModel="{{coffeeToUpdate?.notes}}"></textarea>
       </div>
       <div class="modal-footer">
         <button type="button" id="editModalCloseButton" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
