@@ -22,22 +22,7 @@ public class Coffee implements Serializable {
     private String brewMethod;
     private String notes;
     private Float rating;
-    private Float sweet;
-    private Float acidic;
-    private Float floral;
-    private Float spicy;
-    private Float salty;
-    private Float berryfriut;
-    private Float citrusfruit;
-    private Float stonefruit;
-    private Float chocolate;
-    private Float caramel;
-    private Float smoky;
-    private Float bitter;
-    private Float savory;
-    private Float body;
-    private Float clean;
-    private Float linger;
+    private Taste taste;
 
     public Long getId() {
         return id;
@@ -111,132 +96,12 @@ public class Coffee implements Serializable {
         this.rating = rating;
     }
 
-    public Float getSweet() {
-        return sweet;
+    public Taste getTaste() {
+        return taste;
     }
 
-    public void setSweet(Float sweet) {
-        this.sweet = sweet;
-    }
-
-    public Float getAcidic() {
-        return acidic;
-    }
-
-    public void setAcidic(Float acidic) {
-        this.acidic = acidic;
-    }
-
-    public Float getFloral() {
-        return floral;
-    }
-
-    public void setFloral(Float floral) {
-        this.floral = floral;
-    }
-
-    public Float getSpicy() {
-        return spicy;
-    }
-
-    public void setSpicy(Float spicy) {
-        this.spicy = spicy;
-    }
-
-    public Float getSalty() {
-        return salty;
-    }
-
-    public void setSalty(Float salty) {
-        this.salty = salty;
-    }
-
-    public Float getBerryfriut() {
-        return berryfriut;
-    }
-
-    public void setBerryfriut(Float berryfriut) {
-        this.berryfriut = berryfriut;
-    }
-
-    public Float getCitrusfruit() {
-        return citrusfruit;
-    }
-
-    public void setCitrusfruit(Float citrusfruit) {
-        this.citrusfruit = citrusfruit;
-    }
-
-    public Float getStonefruit() {
-        return stonefruit;
-    }
-
-    public void setStonefruit(Float stonefruit) {
-        this.stonefruit = stonefruit;
-    }
-
-    public Float getChocolate() {
-        return chocolate;
-    }
-
-    public void setChocolate(Float chocolate) {
-        this.chocolate = chocolate;
-    }
-
-    public Float getCaramel() {
-        return caramel;
-    }
-
-    public void setCaramel(Float caramel) {
-        this.caramel = caramel;
-    }
-
-    public Float getSmoky() {
-        return smoky;
-    }
-
-    public void setSmoky(Float smoky) {
-        this.smoky = smoky;
-    }
-
-    public Float getBitter() {
-        return bitter;
-    }
-
-    public void setBitter(Float bitter) {
-        this.bitter = bitter;
-    }
-
-    public Float getSavory() {
-        return savory;
-    }
-
-    public void setSavory(Float savory) {
-        this.savory = savory;
-    }
-
-    public Float getBody() {
-        return body;
-    }
-
-    public void setBody(Float body) {
-        this.body = body;
-    }
-
-    public Float getClean() {
-        return clean;
-    }
-
-    public void setClean(Float clean) {
-        this.clean = clean;
-    }
-
-    public Float getLinger() {
-        return linger;
-    }
-
-    public void setLinger(Float linger) {
-        this.linger = linger;
+    public void setTaste(Taste taste) {
+        this.taste = taste;
     }
 
     @Override
@@ -251,22 +116,8 @@ public class Coffee implements Serializable {
                 ", brewMethod='" + brewMethod + '\'' +
                 ", notes='" + notes + '\'' +
                 ", rating=" + rating +
-                ", sweet=" + sweet +
-                ", acidic=" + acidic +
-                ", floral=" + floral +
-                ", spicy=" + spicy +
-                ", salty=" + salty +
-                ", berryfriut=" + berryfriut +
-                ", citrusfruit=" + citrusfruit +
-                ", stonefruit=" + stonefruit +
-                ", chocolate=" + chocolate +
-                ", caramel=" + caramel +
-                ", smoky=" + smoky +
-                ", bitter=" + bitter +
-                ", savory=" + savory +
-                ", body=" + body +
-                ", clear=" + clean +
-                ", linger=" + linger +
+                ", taste=" + taste +
                 '}';
     }
 }
+
