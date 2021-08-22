@@ -5,6 +5,12 @@
 .navbar {
     padding-left: 10px;
     padding-right: 10px;
+    .navbar-brand {
+        font-size: 2.25rem;
+        .logo {
+            width: 80px;
+        }
+    }
     .navbar-collapse {
         display: flex;
         justify-content: space-between;
@@ -36,8 +42,12 @@
         display: flex;
         justify-content: space-evenly;
 
-        .body-left, .body-middle, .body-right {
-            width: 30%;
+        .body-left {
+            width: 45%;
         }
+
+    }
+    .body-notes {
+        padding: 0 2rem 1rem;
     }
 }
