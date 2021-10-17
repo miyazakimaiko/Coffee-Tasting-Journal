@@ -1,5 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { TmplAstElement } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Coffee, Taste } from './coffee';
@@ -16,9 +14,11 @@ export class AppComponent implements OnInit {
   coffee!: Coffee;
   coffees!: Coffee[];
   coffeeToUpdate: Coffee | undefined;
-  coffeeToDelete!: Coffee;
+  coffeeToDelete: Coffee | undefined;
 
-  constructor(private coffeeService: CoffeeService) {}
+  constructor(
+    private coffeeService: CoffeeService
+    ) {}
 
   ngOnInit() {
     this.coffeeService.getCoffees().subscribe(
@@ -28,9 +28,9 @@ export class AppComponent implements OnInit {
           this.addDemoData();
         }
       },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
+      // (error: HttpErrorResponse) => {
+      //   alert(error.message);
+      // }
     );
   }
 
@@ -39,9 +39,9 @@ export class AppComponent implements OnInit {
       (response: Coffee[]) => {
         this.coffees = response;
       },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
+      // (error: HttpErrorResponse) => {
+      //   alert(error.message);
+      // }
     );
   }
 
@@ -53,10 +53,10 @@ export class AppComponent implements OnInit {
         this.getCoffees();
         addForm.reset();
       },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-        addForm.reset();
-      }
+      // (error: HttpErrorResponse) => {
+      //   alert(error.message);
+      //   addForm.reset();
+      // }
     );
   }
 
@@ -66,9 +66,9 @@ export class AppComponent implements OnInit {
       (response: Coffee) => {
         this.getCoffees();
       },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
+      // (error: HttpErrorResponse) => {
+      //   alert(error.message);
+      // }
     );
   }
 
@@ -78,9 +78,9 @@ export class AppComponent implements OnInit {
       (response: void) => {
         this.getCoffees();
       },
-      (error: HttpErrorResponse) => {
-        alert(error.message)
-      }
+      // (error: HttpErrorResponse) => {
+      //   alert(error.message)
+      // }
     )
   }
 
@@ -102,7 +102,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  public onOpenModal(coffee: any, mode: string): void {
+  public onOpenModal(mode: string, coffee?: Coffee): void {
     if (mode === 'add') {
       console.log("adding")
     }
@@ -142,11 +142,7 @@ export class AppComponent implements OnInit {
     this.coffee.taste.linger = 8
 
     this.coffeeService.addCoffee(this.coffee).subscribe(
-      (response: Coffee) => {},
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
+      (response: Coffee) => {});
 
     this.coffee = new Coffee;
     this.coffee.name = 'Tropical Blend';
@@ -179,9 +175,9 @@ export class AppComponent implements OnInit {
       (response: Coffee) => {
         this.getCoffees();
       },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
+      // (error: HttpErrorResponse) => {
+      //   alert(error.message);
+      // }
     );
   }
 

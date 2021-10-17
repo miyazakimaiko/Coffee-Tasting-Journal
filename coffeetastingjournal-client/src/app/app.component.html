@@ -10,7 +10,7 @@
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
-        <button (click)="onOpenModal(null, 'add')" type="button" class="btn btn-primary-rgba" data-bs-toggle="modal" data-bs-target="#addCoffeeModal">Add a journal</button>
+        <button (click)="onOpenModal('add')" type="button" class="btn btn-primary-rgba" data-bs-toggle="modal" data-bs-target="#addCoffeeModal">Add a journal</button>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
@@ -72,8 +72,8 @@
                             </table>
                         </div>
                         <div class="button-list mt-4 mb-3">
-                          <button (click)="onOpenModal(c, 'delete')" type="button" data-bs-toggle="modal" data-bs-target="#deleteCoffeeModal" class="btn btn-primary-rgba"><i class="feather icon-message-square mr-2"></i>Delete</button>
-                          <button (click)="onOpenModal(c, 'update')" type="button" data-bs-toggle="modal" data-bs-target="#updateCoffeeModal" class="btn btn-success-rgba"><i class="feather icon-phone mr-2"></i>Edit</button>
+                          <button (click)="onOpenModal('delete', c)" type="button" data-bs-toggle="modal" data-bs-target="#deleteCoffeeModal" class="btn btn-primary-rgba"><i class="feather icon-message-square mr-2"></i>Delete</button>
+                          <button (click)="onOpenModal('update', c)" type="button" data-bs-toggle="modal" data-bs-target="#updateCoffeeModal" class="btn btn-success-rgba"><i class="feather icon-phone mr-2"></i>Edit</button>
                         </div>
                     </div>
                 </div>
